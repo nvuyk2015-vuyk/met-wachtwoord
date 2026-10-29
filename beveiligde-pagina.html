@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beveiligde Pagina</title>
+    <style>
+        
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: white;
+}
+
+.login-container {
+    background: #111;
+    color: white;
+    padding: 30px;
+    border: 2px solid #ff8000;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    width: min(320px, calc(100vw - 40px));
+}
+
+.login-container h2,
+.login-container p {
+    color: white;
+}
+
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    background: black;
+    color: white;
+    border: 2px solid #ff8000;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-container input[type="password"]::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+        #protected-content {
+            display: none;
+            background: #111;
+            color: white;
+            padding: 30px;
+            border: 2px solid #ff8000;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            width: min(320px, calc(100vw - 40px));
+        }
+        #protected-content h1 {
+            color: white;
+            font-size: 1.5em;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Het Inlogscherm -->
+    <div id="login-form" class="login-container">
+        <h2>Toegang Vereist</h2>
+        <p>Voer het wachtwoord in om de inhoud te bekijken.</p>
+        <input type="password" id="password-input" placeholder="Wachtwoord">
+        <button onclick="checkPassword()">Inloggen</button>
+        <p id="error" class="error-message">Onjuist wachtwoord. Probeer het opnieuw.</p>
+    </div>
+
+    <!-- De Beveiligde Inhoud -->
+    <div id="protected-content">
+        <h1>Dit is Nathanaël Frederik Johannes Vuyk’s website met wachtwoord</h1>
+    </div>
+
+    <script>
+        function checkPassword() {
+            // Pas hieronder het gewenste wachtwoord aan
+            const correctPassword = "IvsiTl25!G";
+            const userInput = document.getElementById("password-input").value;
+            const errorElement = document.getElementById("error");
+
+            if (userInput === correctPassword) {
+                // Verberg het inlogscherm en toon de inhoud
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("protected-content").style.display = "block";
+            } else {
+                // Toon foutmelding
+                errorElement.style.display = "block";
+                document.getElementById("password-input").value = ""; // Maak invoerveld leeg
+            }
+        }
+
+        // Zorg dat de gebruiker ook op 'Enter' kan drukken om in te loggen
+        document.getElementById("password-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
+
+</body>
+</html>
